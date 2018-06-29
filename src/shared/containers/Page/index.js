@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {
-	handleGetData,
-} from 'ducks/content';
+import { handleGetData } from 'ducks/content';
 
 @connect(
 	state => ({ content: state.content }),
@@ -30,7 +28,7 @@ export default class Page extends Component {
 
 		return (
 			<div className={styles.page}>
-				<div onClick={this.handleClick('page content')}>I am page, click me</div>
+				<div onClick={this.handleClick('hey')}>I am page, click me</div>
 				{content.data}
 			</div>
 		);

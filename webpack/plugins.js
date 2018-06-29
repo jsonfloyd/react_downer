@@ -17,14 +17,13 @@ export default [
 		minChunks: module => /node_modules/.test(module.resource),
 	}),
 	...isDebug ? [] : [
-		/* new webpack.optimize.UglifyJsPlugin({
+		new webpack.optimize.UglifyJsPlugin({
 			sourceMap: true,
 			compress: {
-				dead_code: true,
-				unused: true,
 				screw_ie8: true,
-				warnings: isVerbose || isAnalyze,
-				typeofs: false,
+				warnings: false,
+				unused: true,
+				dead_code: true,
 			},
 			mangle: {
 				screw_ie8: true,
@@ -33,10 +32,9 @@ export default [
 				comments: false,
 				screw_ie8: true,
 			},
-		}), */
+		}),
 	],
 	new ExtractTextPlugin({
 		filename: 'styles.css',
 	}),
 ];
-

@@ -1,4 +1,3 @@
-import path from 'path';
 import { isDebug } from './config';
 import initial from '../package.json';
 
@@ -18,6 +17,7 @@ const options = {
 export default [
 	{
 		test: /\.jsx?$/,
+		exclude: /node_modules/,
 		use: [
 			{
 				loader: 'babel-loader',
@@ -43,15 +43,12 @@ export default [
 					],
 				},
 			},
-			{
+			/* {
 				loader: 'eslint-loader',
 				options: {
 					failOnError: true,
 				},
-			},
-		],
-		include: [
-			path.resolve(__dirname, '../src'),
+			}, */
 		],
 	},
 	{
@@ -88,6 +85,6 @@ export default [
 	},
 	{
 		test: /\.json$/,
-		loader: 'json',
+		loader: 'json-loader',
 	},
 ];
