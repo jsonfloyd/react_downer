@@ -11,19 +11,12 @@ import createHistory from 'history/createBrowserHistory';
 import store from 'helpers/store';
 
 import App from 'containers/App';
-import Page from 'containers/Page';
 
 const history = createHistory();
 
 render(
 	<Provider store={store}>
-		<Router history={history}>
-			<App>
-				<Switch>
-					<Route exact path="/" component={Page} />
-				</Switch>
-			</App>
-		</Router>
+		<App />
 	</Provider>,
 	document.getElementById('app'),
 );

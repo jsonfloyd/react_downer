@@ -7,7 +7,57 @@ const GET_DATA_SUCCESS = 'todos/GET_DATA_SUCCESS';
 const GET_DATA_ERROR = 'todos/GET_DATA_ERROR';
 
 const initialState = {
-	data: 'No data',
+	data: 'No data1',
+	tree: {
+		name: 'root',
+		type: 'folder',
+		childrens : [
+		 	{
+				name : 'f1',
+				type: 'folder',
+				childrens: [
+					{
+						name: 'f1f1',
+						type: 'file',
+						childrens : []
+					}
+				]
+			},
+			{
+				name : 'f2',
+				type: 'folder',
+				childrens: [
+					{
+						name: 'f2f1',
+						type: 'file',
+						childrens : []
+					},
+					{
+						name : 'f22',
+						type: 'folder',
+						childrens: [
+							{
+								name: 'f22f1',
+								type: 'file',
+								childrens : []
+							}
+						]
+					},
+				]
+			},
+			{
+				name : 'f3',
+				type: 'folder',
+				childrens: [
+					{
+						name: 'f3f1',
+						type: 'file',
+						childrens : []
+					}
+				]
+			}
+		]
+	}
 };
 
 
@@ -17,6 +67,7 @@ export default function content(state = initialState, action = {}) {
 		return {
 			...state,
 			data: action.data,
+			tree: action.tree
 		};
 	default:
 		return state;
