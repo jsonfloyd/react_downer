@@ -66,8 +66,7 @@ export default function content(state = initialState, action = {}) {
 	case GET_DATA_SUCCESS:
 		return {
 			...state,
-			data: action.data,
-			tree: action.tree
+			data: action.data
 		};
 	default:
 		return state;
@@ -83,7 +82,9 @@ export function handleGetData(data) {
 
 function* getData(action) {
 	try {
-		const { data } = action;
+		console.log(action);
+		const { data } = yield (axios.get('/api/show/' + action.data + '.json'));
+
 		yield put({ type: GET_DATA_SUCCESS, data });
 	} catch (error) {
 		yield put({ type: GET_DATA_ERROR });

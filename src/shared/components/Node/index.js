@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { handleGetData } from 'ducks/content';
+
 
 export default class Node extends Component {
     static propTypes = {
@@ -22,10 +22,9 @@ export default class Node extends Component {
 			name,
 			childrens
 		} = this.props;
-		console.log(this.props)
 		const childrensList = childrens !== undefined ? childrens.map( (item) => <Node handleGetData={this.props.handleGetData} key={item.name} type={item.type}  name={item.name} childrens={item.childrens} />) : null;
 		return (
-			<li onClick={this.handleClick('file')} className={[styles.node, styles[type]].join(' ')} >
+			<li onClick={this.handleClick(name)} className={[styles.node, styles[type]].join(' ')} >
 				<span>{name}</span>
 				<ul>{childrensList}</ul>
 			</li>

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import Node from 'components/Node';
 import { handleGetData } from 'ducks/content';
-import Node from 'components/Node'
 @connect(
 	state => ({ content: state.content }),
 	{ handleGetData },
