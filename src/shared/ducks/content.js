@@ -1,6 +1,7 @@
 import { put, all, call, takeEvery, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import sagasManager from 'helpers/sagasManager';
+import parse from 'helpers/parser';
 
 const GET_DATA_REQUEST = 'todos/GET_DATA_REQUEST';
 const GET_DATA_SUCCESS = 'todos/GET_DATA_SUCCESS';
@@ -9,55 +10,11 @@ const GET_DATA_ERROR = 'todos/GET_DATA_ERROR';
 const initialState = {
 	data: 'No data1',
 	tree: {
-		name: 'root',
+		name: 'f47',
 		type: 'folder',
-		childrens : [
-		 	{
-				name : 'f1',
-				type: 'folder',
-				childrens: [
-					{
-						name: 'f1f1',
-						type: 'file',
-						childrens : []
-					}
-				]
-			},
-			{
-				name : 'f2',
-				type: 'folder',
-				childrens: [
-					{
-						name: 'f2f1',
-						type: 'file',
-						childrens : []
-					},
-					{
-						name : 'f22',
-						type: 'folder',
-						childrens: [
-							{
-								name: 'f22f1',
-								type: 'file',
-								childrens : []
-							}
-						]
-					},
-				]
-			},
-			{
-				name : 'f3',
-				type: 'folder',
-				childrens: [
-					{
-						name: 'f3f1',
-						type: 'file',
-						childrens : []
-					}
-				]
-			}
-		]
-	}
+		childrens: [
+		],
+	},
 };
 
 
@@ -66,7 +23,7 @@ export default function content(state = initialState, action = {}) {
 	case GET_DATA_SUCCESS:
 		return {
 			...state,
-			data: action.data
+			data: action.data,
 		};
 	default:
 		return state;
@@ -82,9 +39,9 @@ export function handleGetData(data) {
 
 function* getData(action) {
 	try {
-		console.log(action);
+		console.log(action); // Not working TODO: Utto, pochemu not working?
 		const { data } = yield (axios.get('/api/show/' + action.data + '.json'));
-
+		console.log(data.data);
 		yield put({ type: GET_DATA_SUCCESS, data });
 	} catch (error) {
 		yield put({ type: GET_DATA_ERROR });

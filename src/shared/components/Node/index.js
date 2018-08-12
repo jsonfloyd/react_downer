@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-
-
 export default class Node extends Component {
-    static propTypes = {
-        content: PropTypes.shape({
+	static propTypes = {
+		handleGetData: PropTypes.func.isRequired,
 		type: PropTypes.string,
 		name: PropTypes.string,
-		childrens: PropTypes.array
-    })
+		childrens: PropTypes.arrayOf(PropTypes.object),
 	}
-	handleClick = data => () => {
+	handleClick = data => (e) => {
+		e.stopPropagation();
 		this.props.handleGetData(data);
 	}
 	render() {
@@ -20,12 +17,23 @@ export default class Node extends Component {
 		const {
 			type,
 			name,
-			childrens
+			childrens,
 		} = this.props;
-		const childrensList = childrens !== undefined ? childrens.map( (item) => <Node handleGetData={this.props.handleGetData} key={item.name} type={item.type}  name={item.name} childrens={item.childrens} />) : null;
+		const childrensList = childrens !== undefined ? childrens.map(item =>
+			(
+				<Node
+					handleGetData={this.props.handleGetData}
+					key={item.name}
+					type={item.type}
+					name={item.name}
+					childrens={item.childrens}
+				/>
+			))
+			: null;
 		return (
-			<li onClick={this.handleClick(name)} className={[styles.node, styles[type]].join(' ')} >
+			<li className={[styles.node, styles[type]].join(' ')} >
 				<span>{name}</span>
+				<button onClick={this.handleClick(name)}>+</button>
 				<ul>{childrensList}</ul>
 			</li>
 		);

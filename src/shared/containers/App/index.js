@@ -12,7 +12,7 @@ export default class App extends Component {
 		handleGetData: PropTypes.func.isRequired,
 		content: PropTypes.shape({
 			data: PropTypes.string,
-			tree : PropTypes.object
+			tree: PropTypes.object,
 		}),
 	}
 
@@ -23,17 +23,18 @@ export default class App extends Component {
 		const styles = require('./styles.scss');
 		const {
 			content,
-			handleGetData
 		} = this.props;
 
 		return (
 			<div className={styles.app}>
 				<div className={styles.container}>
 					<div>I am app</div>
-					<ul>
-						<Node handleGetData={handleGetData} type={content.tree.type}  name={content.tree.name} childrens={content.tree.childrens} />
-					</ul>
-					{this.props.children}
+					<Node
+						handleGetData={handleGetData}
+						type={content.tree.type}
+						name={content.tree.name}
+						childrens={content.tree.childrens}
+					/>
 				</div>
 			</div>
 		);
